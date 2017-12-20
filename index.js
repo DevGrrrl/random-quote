@@ -8,49 +8,42 @@ var twitterbtn = document.getElementById('twitter-share-button');
 var link;
 var tweetText;
 
-var url = 'https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en';
-
-
-function getQuote(url) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-    var obj = JSON.parse(xhr.responseText);
-    updateDom(obj);
-  } else {
-    console.log('error');
-  }
-}
-  xhr.open("GET", url, true);
-  xhr.send();
+function tweet() {
 
 }
 
-function updateDom(response){
+function updateDom(response) {
   //stop repeat of quotes
-   if (response.quoteLink === quote.link) {
-     getData();
-   } else {
-     //updateDom
-     quote.link = response.quoteLink;
-     var text = response.quoteText;
-     quote.innerText = "\" " + text.trim() + "\" ";
-     author.innerText = response.quoteAuthor;
-     tweetText = "\"" + text.trim() + "\" " + response.quoteAuthor + "   %23quotes";
-     twitterbtn.href = "https://twitter.com/intent/tweet?text=" + tweetText;
-     //only display tweet link once quote quote has been received
-     if (section.classList.contains('hidden')) {
-       section.classList.remove('hidden');
-     }
-   }
+  if (response.quoteLink === quote.link) {
+    getData();
+  } else {
+    //updateDom
+    quote.link = response.quoteLink;
+    var text = response.quoteText;
+    quote.innerText = "\" " + text.trim() + "\" ";
+    author.innerText = response.quoteAuthor;
+    tweetText = "\"" + text.trim() + "\" " + response.quoteAuthor + "   %23quotes";
+    twitterbtn.href = "https://twitter.com/intent/tweet?text=" + tweetText;
+    //only display tweet link once quote quote has been received
+    if (section.classList.contains('hidden')) {
+      section.classList.remove('hidden');
+    }
+  }
+
+}
+
+function getData() {
+  var script = document.createElement("script");
+  script.src = "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=updateDom";
+  document.getElementsByTagName("head")[0].appendChild(script);
 }
 
 
-function newQuoteListener(url) {
+function newQuoteListener() {
   search.addEventListener('click', function(e) {
-    getQuote(url);
-  });
+    getData();
+  })
 }
 
 
-newQuoteListener(url);
+newQuoteListener();
