@@ -1,7 +1,5 @@
 # Random Quote Generator
 ## Free Code Camp Random Quote Generator Project
-
-**currently doens't work on github pages (unless you agree to load unsafe scripts (chrome)) or codepen - but in the mean time can be run locally**
  
 
 **Objective:**
