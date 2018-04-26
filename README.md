@@ -12,3 +12,7 @@ No libraries.
 I can click a button to show me a new random quote.
 
 I can press a button to tweet out a quote.
+
+Project Gif:
+
+![rendomquote](https://user-images.githubusercontent.com/22034073/39293879-0784bd60-4932-11e8-88b7-a812da9e2db7.gif)
